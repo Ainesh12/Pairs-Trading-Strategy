@@ -64,37 +64,37 @@ performance reporting.
 pairs-trading/
 ├─ .venv/                  # Virtual environment (ignored by git)
 ├─ config/
-│  ├─model.yaml            # Chosen MA_V configuration (window, entry/exit, etc.)
-│  ├─backtest.yaml
-│  ├─base.yaml
-│  ├─data.yaml
+│  ├─model.yaml            # Chosen MA_V configuration (window, entry/exit, risk frac, transaction cost etc.)
+│  ├─backtest.yaml         # Backtesting settings (tested pairs, data path, result files)
+│  ├─base.yaml    
+│  ├─data.yaml             # Data source config. (provider, tickers, start/end date etc.)
 │  ├─risk.yaml
 ├─ data/
-│  ├─ raw/                 # Raw price data (if used)
-│  │  └─ adj_close.csv
-│  ├─ interim/
-│  │  └─ adj_close_clean.csv
-│  └─ processed/
-│     ├─ hedge_results_<PAIR>.csv
-│     ├─ signals_<PAIR>.csv
-│     ├─ backtest_results_<PAIR>.csv
-│     ├─ paper_results_<PAIR>.csv
-│     └─ plots (*.png)
+│  ├─ raw/                 # Raw untouched market data
+│  │  └─ adj_close.csv     # Adjusted close prices for all tickers (downloaded input)    
+│  ├─ interim/             # Intermediate cleaned data used for feature generation
+│  │  └─ adj_close_clean.csv  # Aligned + filtered daily prices (removes missing dates, bad rows)
+│  └─ processed/                      # Generated results                   
+│     ├─ hedge_results_<PAIR>.csv     # OLS hedge ratio + spread series per pair
+│     ├─ signals_<PAIR>.csv           # Trading signals (+1: long the spread, -1: short the spread, 0: no position)(entry/exist positions)
+│     ├─ backtest_results_<PAIR>.csv  # Backtest performance results for each tested pair
+│     ├─ paper_results_<PAIR>.csv     # "Paper Trading" logs
+│     └─ plots (*.png)                # strategy equity curve, max drawdown, daily return distribution, Z-score with entry/exit markers plots
 ├─ src/
 │  ├─ backtest/
 │  │  └─ backtest.py       # Backtesting engine
 │  ├─ data/
 │  │  ├─ clean.py          # Build adj_close_clean.csv
-│  │  ├─ loader.py
+│  │  ├─ loader.py         # Load raw price data 
 │  ├─ features/
 │  │  ├─ hedge_ratio.py    # Estimate hedge ratio & spread
 │  │  └─ signals.py        # Rolling z-score & position signals
 │  ├─ live/
-│  │  └─ paper_engine.py   # Paper trading replay engine
+│  │  └─ paper_engine.py   # Paper trading engine
 │  ├─ plots/
 │  │  └─ plot_paper_results.py  # Equity / DD / returns / z-score plots
 │  ├─ __init__.py
-│  └─ cli.py               # Optional convenience CLI (not required)
+│  └─ cli.py               # CLI (project expansion)
 ├─ .env.example
 ├─ pyproject.toml / requirements.txt
 └─ README.md
