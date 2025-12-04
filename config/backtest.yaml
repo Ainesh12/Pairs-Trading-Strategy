@@ -1,0 +1,11 @@
+tested_pairs:
+  - MA_V
+  - KO_PEP
+  - XOM_CVX
+  - JPM_BAC
+data_path: data/processed/
+result_files:
+  MA_V: backtest_results_MA_V.csv
+  KO_PEP: backtest_results_KO_PEP.csv
+  XOM_CVX: backtest_results_XOM_CVX.csv
+  JPM_BAC: backtest_results_JPM_BAC.csv

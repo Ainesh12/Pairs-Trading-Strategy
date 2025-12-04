@@ -1,0 +1,7 @@
+pair: MA_V
+starting_cash: 100000
+risk_frac: 0.7
+window: 90
+entry_z: 2.0
+exit_z: 0.5
+transaction_cost: 0.0002
